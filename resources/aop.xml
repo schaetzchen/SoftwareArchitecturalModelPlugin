@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aspectj>
+    <aspects>
+        <concrete-aspect name="executiondatalogging.ConcreteAspect"
+                         extends="executiondatalogging.LoggingAspect">
+            <pointcut name="methodExecuted"
+                      expression="" />
+        </concrete-aspect>
+    </aspects>
+</aspectj>
