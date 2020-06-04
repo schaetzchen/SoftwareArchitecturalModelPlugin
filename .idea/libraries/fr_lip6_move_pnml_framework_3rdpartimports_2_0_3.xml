@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="fr.lip6.move.pnml.framework.3rdpartimports_2.0.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.3rdpartimports_2.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/net.sourceforge.lpg.lpgjavaruntime-1.1.0.v200711021030.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.coremodel_2.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.hlpn_2.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.pthlpng_2.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.ptnet_2.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.symmetricnet_2.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.utils_2.1.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.coremodel_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.hlpn_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.pthlpng_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.ptnet_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.symmetricnet_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.utils_2.1.9.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.utils_2.1.9.jar!/test" />
+    </SOURCES>
+  </library>
+</component>

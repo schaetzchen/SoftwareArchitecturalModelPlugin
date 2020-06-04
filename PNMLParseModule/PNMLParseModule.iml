@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="12" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="fr.lip6.move.pnml.pnml2dot_2.1.7" level="project" />
+    <orderEntry type="library" name="args4j-2.0.12" level="project" />
+    <orderEntry type="library" name="fr.lip6.move.pnml.framework.3rdpartimports_2.0.3" level="project" />
+    <orderEntry type="library" name="org.eclipse.emf.common_2.4.0.v200806091234" level="project" />
+    <orderEntry type="library" name="java" level="project" />
+  </component>
+</module>

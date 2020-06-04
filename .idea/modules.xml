@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PNMLParseModule/PNMLParseModule.iml" filepath="$PROJECT_DIR$/PNMLParseModule/PNMLParseModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PythonModule/PythonModule.iml" filepath="$PROJECT_DIR$/PythonModule/PythonModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftwareArchitecturalModelPlugin.iml" filepath="$PROJECT_DIR$/SoftwareArchitecturalModelPlugin.iml" />
+    </modules>
+  </component>
+</project>

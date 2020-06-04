@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/lib/woodstox-woodstox-core-6.2.1/src/main/java" />
+      <root url="file://$PROJECT_DIR$/lib/lib/woodstox-woodstox-core-6.2.1/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

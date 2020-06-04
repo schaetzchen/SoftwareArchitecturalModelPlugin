@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="args4j-2.0.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lib/args4j-2.0.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PNMLParseModule:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PNMLParseModule_jar</output-path>
+    <root id="archive" name="PNMLParseModule.jar">
+      <element id="module-output" name="PNMLParseModule" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/fr.lip6.move.pnml.pnml2dot_2.1.7.jar" path-in-jar="/" />
+      <element id="library" level="project" name="java" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/args4j-2.0.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/org.eclipse.emf.common_2.4.0.v200806091234.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/org.eclipse.emf.ecore_2.4.0.v200806091234.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/org.eclipse.ocl.ecore_1.2.0.v200805130238.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/org.eclipse.ocl_1.2.0.v200806091438.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.3rdpartimports_2.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/net.sourceforge.lpg.lpgjavaruntime-1.1.0.v200711021030.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.coremodel_2.1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.hlpn_2.1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.pthlpng_2.1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.ptnet_2.1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.symmetricnet_2.1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lib/fr.lip6.move.pnml.framework.utils_2.1.9.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

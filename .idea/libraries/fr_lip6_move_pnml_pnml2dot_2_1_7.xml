@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="fr.lip6.move.pnml.pnml2dot_2.1.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/fr.lip6.move.pnml.pnml2dot_2.1.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/fr.lip6.move.pnml.pnml2dot_2.1.7.jar!/src" />
+      <root url="jar://$PROJECT_DIR$/lib/fr.lip6.move.pnml.pnml2dot_2.1.7.jar!/test" />
+    </SOURCES>
+  </library>
+</component>
