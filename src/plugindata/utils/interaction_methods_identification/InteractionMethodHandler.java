@@ -1,25 +1,23 @@
 package plugindata.utils.interaction_methods_identification;
 
-import plugindata.entities.Graph;
-import plugindata.entities.SoftwareExecutionData;
-import plugindata.entities.SoftwareMethod;
-import plugindata.entities.SoftwareInterface;
+import plugindata.entities.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class InteractionMethodHandler {
 
-    public static Graph getMethodCallingGraph(SoftwareExecutionData executionData) {
+    public static Graph getMethodCallingGraph(List<ExecutionDataEvent> executionData) {
 
-        Graph g = new Graph(executionData.getData().size());
+        Graph g = new Graph(executionData.size());
 
-        for (int i = 0; i < executionData.getData().size() - 1; i++)
-            for (int j = i + 1; j < executionData.getData().size(); j++)
+        for (int i = 0; i < executionData.size() - 1; i++)
+            for (int j = i + 1; j < executionData.size(); j++)
                 if (
 //                        !executionData.getData().get(i).getCalleeID().equals(Integer.MIN_VALUE) &&
 //                executionData.getData().get(i).getCalleeID().equals(executionData.getData().get(j).getCallerID()))
-                        executionData.getData().get(i).getCalleeMethod().equals(executionData.getData().get(j).getCallerMethod()))
+                        executionData.get(i).getCalleeMethod().equals(executionData.get(j).getCallerMethod()))
                     g.addEdge(i, j);
 
         return g;
@@ -42,7 +40,7 @@ public abstract class InteractionMethodHandler {
     }
 
     public static Set<SoftwareMethod> getInteractionMethods(Set<SoftwareInterface> interfaces,
-                                                     SoftwareExecutionData data, Graph methodCallingGraph) {
+                                                            SoftwareExecutionData data, Graph methodCallingGraph) {
 
         Set<SoftwareMethod> res = new HashSet<>();
 
@@ -59,8 +57,8 @@ public abstract class InteractionMethodHandler {
                                     getBelongingInterface(interfaces, data.getData().get(j).getCalleeMethod());
 
                             if (secondMethodInterface != null &&
-                            secondMethodInterface.getBelongingComponent().getName().equals(anInterface.getBelongingComponent().getName()) &&
-                            checkInvocationRelation(i, j, methodCallingGraph)) {
+                                    secondMethodInterface.getBelongingComponent().getName().equals(anInterface.getBelongingComponent().getName()) &&
+                                    checkInvocationRelation(i, j, methodCallingGraph)) {
                                 res.add(new SoftwareMethod(candidateMethod, anInterface));
                                 keepgoing = false;
                             }

@@ -28,4 +28,8 @@ public class SoftwareComponent {
     public List<SoftwareInterface> getInterfaces() {
         return interfaces;
     }
+
+    public void removeAllInterfaces() {
+        interfaces.clear();
+    }
 }

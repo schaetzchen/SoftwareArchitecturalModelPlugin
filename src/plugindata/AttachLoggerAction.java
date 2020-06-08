@@ -29,6 +29,7 @@ public class AttachLoggerAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
 
+        ComponentDataHandler.retrievePackageDataInfo(e.getProject());
         addAJWeaverJarFile(getEventProject(e));
         File f = new File(getClass().getClassLoader().getResource("LoggingAspect.java").getFile());
         VirtualFile vf = LocalFileSystem.getInstance().findFileByIoFile(f);
@@ -46,7 +47,7 @@ public class AttachLoggerAction extends AnAction {
         VirtualFile f = LocalFileSystem.getInstance().findFileByIoFile(ajw);
         VirtualFile dir = LocalFileSystem.getInstance().findFileByIoFile(new File(project.getBasePath()));
 
-        if (! new File(dir.getPath() + "\\aspectjweaver.jar").exists())
+        if (!new File(dir.getPath() + "\\aspectjweaver.jar").exists())
             RunnableHelper.runWriteCommand(project, new Runnable() {
                 @Override
                 public void run() {
@@ -86,14 +87,13 @@ public class AttachLoggerAction extends AnAction {
                     "        <concrete-aspect name=\"executiondatalogging.ConcreteAspect\"\n" +
                     "                         extends=\"executiondatalogging.LoggingAspect\">\n" +
                     "            <pointcut name=\"methodExecuted\"\n" +
-                    "                      expression=" + buildPointcutExpression() +
+                    "                      expression=" + buildPointcutExpression(project) +
                     " />\n" +
                     "        </concrete-aspect>\n" +
                     "    </aspects>\n" +
                     "</aspectj>");
             fw.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
@@ -118,16 +118,30 @@ public class AttachLoggerAction extends AnAction {
             });
     }
 
-    private String buildPointcutExpression() {
+    private String buildPointcutExpression(Project project) {
+        List<String> packages = getMainPackages(project);
+        if (packages.isEmpty())
+            return "\"\"";
 
-        List<SoftwareComponent> packages = new ArrayList<>(ComponentDataHandler.getComponents());
-        String res = "\"call(* " + packages.get(0).getName() + "..*(..)) || call(" + packages.get(0).getName() +
+        String res = "\"call(* " + packages.get(0) + "..*(..)) || call(" + packages.get(0) +
                 ".*.new(..))";
         for (int i = 1; i < packages.size(); i++)
-            res += " || call(* " + packages.get(i).getName() + "..*(..)) || call(" + packages.get(i).getName() +
+            res += " || call(* " + packages.get(i) + "..*(..)) || call(" + packages.get(i) +
                     ".*.new(..))";
         res += "\"";
         return res;
+    }
+
+    private List<String> getMainPackages(Project project) {
+
+        List<String> packages = new ArrayList<>();
+        File f = new File(project.getBasePath() + "/src");
+        if (!f.exists())
+            return packages;
+        for (File child : f.listFiles())
+            if (child.isDirectory() && !child.getName().equals("executiondatalogging"))
+                packages.add(child.getName());
+        return packages;
     }
 
     private void addAJLib(Module module) {

@@ -5,13 +5,12 @@ import java.util.Set;
 public class ModelConnector implements IModelNode {
 
     private String name;
-    private DotFileClusterData dotData;
+    private ConnectorDotData dotData;
     private ArchitecturalModelImpl model;
 
-    public ModelConnector(ArchitecturalModelImpl model, DotFileClusterData dotData) {
+    public ModelConnector(ArchitecturalModelImpl model, ConnectorDotData dotData) {
         this.model = model;
         this.dotData = dotData;
-        dotData.addAttribute("color=blue");
     }
 
     void setName(String name) {
@@ -19,7 +18,7 @@ public class ModelConnector implements IModelNode {
         dotData.setHeading(name);
     }
 
-    public DotFileClusterData getDotData() {
+    public ConnectorDotData getDotData() {
         return dotData;
     }
 

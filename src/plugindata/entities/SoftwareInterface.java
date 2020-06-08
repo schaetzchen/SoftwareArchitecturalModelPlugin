@@ -34,7 +34,7 @@ public class SoftwareInterface {
         return methodNames;
     }
 
-    public boolean containsMethod(String method)  {
+    public boolean containsMethod(String method) {
 
         for (String s : methodNames)
             if (s.equals(method))

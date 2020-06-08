@@ -42,8 +42,9 @@ public class DotFileClusterData {
         res += "\n";
         for (String edge : edges)
             res += edge + "\n";
+        if (attribute != null)
+            res += "\n" + attribute + "\n";
         res += "\n" + label + "\n";
-        res += "\n" + attribute + "\n";
         res += "}\n";
 
         return res;

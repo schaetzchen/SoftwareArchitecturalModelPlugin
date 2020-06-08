@@ -20,7 +20,7 @@ public class DotFileParser {
             boolean subgraphStarted = false;
             while (line != null && !subgraphStarted) {
 
-                if (line.contains("subgraph")) {
+                if (line.contains("graph [")) {
                     String clusterName = StringUtils.substringBetween(line, "\"");
                     clusterData = new DotFileClusterData(clusterName.substring(clusterName.indexOf("_") + 1));
                     subgraphStarted = true;
@@ -54,13 +54,11 @@ public class DotFileParser {
                     if (shape.equals("box")) {
                         label = nodeName.substring(0, nodeName.lastIndexOf(new File(path).getName().split("\\.")[0]) - 1);
                         clusterData.addNode(nodeName, shape, label, 2);
-                    }
-                    else
+                    } else
                         clusterData.addNode(nodeName, shape, label);
 
                     line = br.readLine();
-                }
-                else
+                } else
                     line = br.readLine();
             }
 
@@ -75,11 +73,9 @@ public class DotFileParser {
                     clusterData.addEdge(StringUtils.substringBetween(sourceAndTarget[0], "\""),
                             StringUtils.substringBetween(sourceAndTarget[1], "\""));
                     line = br.readLine();
-                }
-                else line = br.readLine();
+                } else line = br.readLine();
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

@@ -58,7 +58,7 @@ public class Graph {
         for (int v : adjListArray[x])
             if (x == y)
                 return true;
-            else
+            else if (!visited[v])
                 return DFSUtil(v, y, visited);
         return false;
     }

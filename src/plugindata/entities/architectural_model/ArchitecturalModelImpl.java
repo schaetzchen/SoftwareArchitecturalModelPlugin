@@ -43,6 +43,7 @@ public class ArchitecturalModelImpl {
     public void addArc(String s, String t) {
         arcs.add(new ModelArc(s, t));
     }
+
     public void addArc(String s, String t, String attr) {
         arcs.add(new ModelArc(s, t, attr));
     }

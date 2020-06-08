@@ -1,9 +1,11 @@
 package plugindata.utils.model_visualization;
 
+import com.intellij.openapi.util.Pair;
 import plugindata.entities.SoftwareComponent;
 import plugindata.entities.SoftwareInterface;
 import plugindata.entities.SoftwareMethod;
 import plugindata.entities.architectural_model.ArchitecturalModelImpl;
+import plugindata.entities.architectural_model.ConnectorDotData;
 import plugindata.entities.architectural_model.ModelComponent;
 import plugindata.entities.architectural_model.ModelConnector;
 
@@ -33,7 +35,7 @@ public class ModelConstructor {
         File dir = new File(dirPath);
         for (File file : dir.listFiles())
             if (file.getName().toLowerCase().endsWith(".dot")) {
-                ModelConnector connector = new ModelConnector(model, DotFileParser.parseFile(file.getPath()));
+                ModelConnector connector = new ModelConnector(model, new ConnectorDotData(file.getPath()));
                 model.addConnector(connector);
 
                 String methodName = file.getName().substring(0, file.getName().lastIndexOf('.')).replace('-', '.');
@@ -43,20 +45,22 @@ public class ModelConstructor {
                 for (SoftwareMethod existingMethod : interactionMethods)
                     if (existingMethod.getMethodName().contains(methodName)) {
                         SoftwareInterface source = existingMethod.getBelongingInterface();
-                        String target = connector.getDotData().getNodes().get(0);
-                        target = target.substring(0, target.indexOf(' ') - 1);
-                        model.addArc("\"" + source.getName() + "\"", target, "lhead=\"cluster_" + connector.getName() + "\"");
+                        String target = connector.getDotData().getRandomTransition();
+                        model.addArc("\"" + source.getName() + "\"", target, "label=\"         \",lhead=\"cluster_" + connector.getName() + "\"");
                     }
 
-                for (String node : connector.getDotData().getNodes())
-                    if (node.contains("Interface")) {
-
-                        String source = node.substring(0, node.indexOf(' '));
-                        String temp = file.getName().substring(0, file.getName().lastIndexOf('.'));
-                        String target = node.substring(0, node.indexOf(temp));
-                        target = target.substring(0, target.length() - 1);
-                        model.addArc(source, target);
-                    }
+                for (Pair<String, String> pair : connector.getDotData().getInterfaceIdentifiers()) {
+                    model.addArc(pair.second, "\"" + pair.first + "\"", "label=\"         \"");
+                }
+//                for (String node : connector.getDotData().getNodes())
+//                    if (node.contains("Interface")) {
+//
+//                        String source = node.substring(0, node.indexOf(' '));
+//                        String temp = file.getName().substring(0, file.getName().lastIndexOf('.'));
+//                        String target = node.substring(0, node.indexOf(temp));
+//                        target = target.substring(0, target.length() - 1);
+//                        model.addArc(source, target);
+//                    }
             }
     }
 }

@@ -33,22 +33,18 @@ public class PnmlFileHandler {
                 if (line.contains("net id")) {
                     res.append(line.replaceFirst("net1", fileName));
                     res.append('\n');
-                }
-                else if (line.contains("page id")) {
+                } else if (line.contains("page id")) {
                     res.append(line.replaceFirst("n0", "_" + fileName));
                     res.append('\n');
-                }
-                else if (line.contains("initialMarking")) {
+                } else if (line.contains("initialMarking")) {
                     br.readLine();
                     br.readLine();
-                }
-                else if (line.contains("arc id")) {
+                } else if (line.contains("arc id")) {
                     String toBeReplaced = StringUtils.substringBetween(line, "\"");
                     line = line.replace(toBeReplaced, "_" + toBeReplaced + "_" + fileName);
                     res.append(line);
                     res.append('\n');
-                }
-                else {
+                } else {
                     res.append(line);
                     res.append('\n');
                 }

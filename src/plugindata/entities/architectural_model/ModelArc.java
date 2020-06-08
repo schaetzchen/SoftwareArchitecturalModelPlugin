@@ -31,7 +31,7 @@ public class ModelArc {
 
     public ModelArc(String source, String target) {
         this.source = source;
-        this. target = target;
+        this.target = target;
         attributes = "";
     }
 
@@ -41,7 +41,7 @@ public class ModelArc {
         this.attributes = attributes;
     }
 
-        public String getDotCode() {
-        return source + " -> " + target + "\"[" + attributes + "]\n";
+    public String getDotCode() {
+        return source + " -> " + target + "[" + attributes + "]\n";
     }
 }

@@ -25,21 +25,21 @@ public abstract class InterfaceDiscoveryHandler {
             String callerComponentName = getComponentNameForMethodCall(event.getCallerMethod());
 //            String callerComponentName = event.getCallerMethod().substring(0, event.getCallerMethod().lastIndexOf('.'));
 //            callerComponentName = callerComponentName.substring(0, callerComponentName.lastIndexOf('.'));
-            if (! callerComponentName.equals(SD.getComponentName()))
+            if (!callerComponentName.equals(SD.getComponentName()))
                 topLevelMethods.add(new Pair<>(event.getCallerMethod(), event.getCalleeMethod()));
             else {
                 for (int i = 0; i < executionData.getData().size(); i++) {
                     ExecutionDataEvent eventCopy = executionData.getData().get(i);
                     if (event.getCalleeMethod().equals(eventCopy.getCalleeMethod()) &&
                             event.getCallerMethod().equals(eventCopy.getCallerMethod()) &&
-                    event.getCalleeID().equals(eventCopy.getCalleeID()) &&
-                    event.getCallerID().equals(eventCopy.getCallerID())) {
+                            event.getCalleeID().equals(eventCopy.getCalleeID()) &&
+                            event.getCallerID().equals(eventCopy.getCallerID())) {
 
                         for (Integer y : methodCallingGraph.getAdjacentVertices(i))
                             if (ComponentDataHandler.checkIfSuchComponentExists(getComponentNameForMethodCall(executionData.getData().get(y).getCalleeMethod())) &&
                                     ComponentDataHandler.checkIfSuchComponentExists(getComponentNameForConstructorCall(executionData.getData().get(y).getCalleeMethod())) &&
-                                    ! getComponentNameForMethodCall(executionData.getData().get(y).getCalleeMethod())
-                            .equals(SD.getComponentName()) )
+                                    !getComponentNameForMethodCall(executionData.getData().get(y).getCalleeMethod())
+                                            .equals(SD.getComponentName()))
 //                                    !getComponentNameForConstructorCall(executionData.getData().get(y).getCalleeMethod())
 //                        .equals(SD.getComponentName()) )
 //                                    || !getComponentNameForMethodCall(executionData.getData().get(y).getCallerMethod())
@@ -57,6 +57,8 @@ public abstract class InterfaceDiscoveryHandler {
 
     private static String getComponentNameForMethodCall(String methodSignature) {
         String methodName = methodSignature.substring(methodSignature.lastIndexOf('.') + 1);
+        if (methodName.length() <= 1)
+            return "-";
         if (methodName.charAt(0) != methodName.toLowerCase().charAt(0))
             return getComponentNameForConstructorCall(methodSignature);
 
@@ -156,8 +158,8 @@ public abstract class InterfaceDiscoveryHandler {
         for (ExecutionDataEvent event : data.getData()) {
 
             if (anInterface.containsMethod(event.getCalleeMethod()) &&
-            !event.getCallerMethod().substring(0, event.getCallerMethod().lastIndexOf(".")).
-                    equals(anInterface.getBelongingComponent().getName()))
+                    !event.getCallerMethod().substring(0, event.getCallerMethod().lastIndexOf(".")).
+                            equals(anInterface.getBelongingComponent().getName()))
                 res.add(event);
         }
 

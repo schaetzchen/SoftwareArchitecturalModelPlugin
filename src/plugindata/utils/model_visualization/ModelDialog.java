@@ -32,17 +32,19 @@ public class ModelDialog extends DialogWrapper {
             BufferedImage image = ImageIO.read(new File(pathToImage));
             JLabel picLabel = new JLabel(new ImageIcon(image));
             picLabel.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-            panel.add(picLabel, BorderLayout.WEST);
+//            panel.add(picLabel, BorderLayout.WEST);
 
             JTextPane textPane = new JTextPane();
             textPane.setText(interfaceData);
-            textPane.setPreferredSize(new Dimension(250, 300));
-            panel.add(textPane, BorderLayout.EAST);
+            textPane.setPreferredSize(new Dimension(450, 300));
+//            panel.add(textPane, BorderLayout.EAST);
 
-            panel.setPreferredSize(new Dimension(picLabel.getWidth() + textPane.getWidth() + 5,
-                    picLabel.getHeight() + textPane.getHeight()));
-        }
-        catch (IOException ex) {
+            panel.setSize(new Dimension(picLabel.getWidth() + textPane.getWidth() + 70,
+                    picLabel.getHeight() + textPane.getHeight() + 10));
+
+            panel.add(picLabel, BorderLayout.WEST);
+            panel.add(textPane, BorderLayout.EAST);
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 

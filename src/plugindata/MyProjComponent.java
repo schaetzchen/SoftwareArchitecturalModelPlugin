@@ -9,14 +9,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectManagerListener;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 import plugindata.utils.component_identification.ComponentDataHandler;
 
 public class MyProjComponent implements ProjectComponent {
 
-    private Project project;
-    ApplicationConfiguration config;
-    final String argsLine = "-javaagent:aspectjweaver.jar ";
+    private static Project project;
+    private static ApplicationConfiguration config;
+    final private static String argsLine = "-javaagent:aspectjweaver.jar ";
+    private static MessageBusConnection addParams, removeParams;
 
     public MyProjComponent(@NotNull Project project) {
 
@@ -27,17 +29,18 @@ public class MyProjComponent implements ProjectComponent {
     }
 
     private void attachExecutionListeners() {
-
-        project.getMessageBus().connect().subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
-            @Override
-            public void processStarting(@NotNull String executorId, @NotNull ExecutionEnvironment env) {
-
-                if(config.getVMParameters() == null)
-                    config.setVMParameters(argsLine);
-                else
-                    config.setVMParameters(argsLine + config.getVMParameters());
-            }
-        });
+//
+//        addParams = project.getMessageBus().connect();
+//        addParams.subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
+//            @Override
+//            public void processStarting(@NotNull String executorId, @NotNull ExecutionEnvironment env) {
+//
+//                if (config.getVMParameters() == null)
+//                    config.setVMParameters(argsLine);
+//                else
+//                    config.setVMParameters(argsLine + config.getVMParameters());
+//            }
+//        });
 
         project.getMessageBus().connect().subscribe(ProjectManager.TOPIC, new ProjectManagerListener() {
             @Override
@@ -45,8 +48,34 @@ public class MyProjComponent implements ProjectComponent {
                 ComponentDataHandler.retrievePackageDataInfo(project);
             }
         });
+//
+//        removeParams = project.getMessageBus().connect();
+//        removeParams.subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
+//            @Override
+//            public void processTerminated(@NotNull String executorId, @NotNull ExecutionEnvironment env, @NotNull ProcessHandler handler, int exitCode) {
+//
+//                String newparams = config.getVMParameters().substring(argsLine.length());
+//                config.setVMParameters(newparams);
+//            }
+//        });
+    }
 
-        project.getMessageBus().connect().subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
+    public static void connectParamsListeners() {
+
+        addParams = project.getMessageBus().connect();
+        addParams.subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
+            @Override
+            public void processStarting(@NotNull String executorId, @NotNull ExecutionEnvironment env) {
+
+                if (config.getVMParameters() == null)
+                    config.setVMParameters(argsLine);
+                else
+                    config.setVMParameters(argsLine + config.getVMParameters());
+            }
+        });
+
+        removeParams = project.getMessageBus().connect();
+        removeParams.subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
             @Override
             public void processTerminated(@NotNull String executorId, @NotNull ExecutionEnvironment env, @NotNull ProcessHandler handler, int exitCode) {
 
@@ -56,51 +85,10 @@ public class MyProjComponent implements ProjectComponent {
         });
     }
 
-//    private void addAJWeaverJarFile() {
-//
-//        File ajw = new File(getClass().getClassLoader().getResource("aspectjweaver.jar").getFile());
-//        VirtualFile f = LocalFileSystem.getInstance().findFileByIoFile(ajw);
-//        VirtualFile dir = LocalFileSystem.getInstance().findFileByIoFile(new File(project.getBasePath()));
-//
-//        if (! new File(dir.getPath() + "\\aspectjweaver.jar").exists())
-//            plugindata.RunnableHelper.runWriteCommand(project, new Runnable() {
-//                @Override
-//                public void run() {
-//                        plugindata.RunnableHelper.handleFileCopy(this, f, dir);
-//                }
-//            });
-//    }
-//
-//    private void addLoggingAspectFile() {
-//
-//        File aspect = new File(getClass().getClassLoader().getResource("LoggingAspect.java").getFile());
-//        VirtualFile f = LocalFileSystem.getInstance().findFileByIoFile(aspect);
-//        VirtualFile dir = LocalFileSystem.getInstance().findFileByIoFile(new File(project.getBasePath() + "/src/executiondatalogging"));
-//
-//        if (! new File(dir.getPath() + "\\LoggingAspect.java").exists())
-//            plugindata.RunnableHelper.runWriteCommand(project, new Runnable() {
-//                @Override
-//                public void run() {
-//                    plugindata.RunnableHelper.handleFileCopy(this, f, dir);
-//                }
-//            });
-//    }
-
-//    private void changeProjectCompiler() {
-//
-//        JavaCompilersTab.
-//
-//        CompilerManager.getInstance(project).getCompilers()
-//    }
-
-    @Override
-    public void initComponent() {
-
-//        project.getMessageBus().connect().subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
-//            @Override
-//            public void processStarted(@NotNull String executorId, @NotNull ExecutionEnvironment env, @NotNull ProcessHandler handler) {
-//                Messages.showMessageDialog("Code running!", "msg", Messages.getInformationIcon());
-//            }
-//        });
+    public static void disconnectParamsListeners() {
+        if (addParams != null)
+            addParams.disconnect();
+        if (removeParams != null)
+            removeParams.disconnect();
     }
 }

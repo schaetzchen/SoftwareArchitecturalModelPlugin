@@ -13,6 +13,7 @@ public class ModelComponent implements IModelNode {
         this.model = model;
         this.component = component;
         dotData = constructDotData();
+        dotData.addAttribute("color=red\nstyle=bold");
     }
 
     private DotFileClusterData constructDotData() {
